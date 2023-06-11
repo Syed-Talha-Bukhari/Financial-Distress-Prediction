@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Financial Distress Predictor</title>
+    <style>
+      body {
+        overflow-y: hidden;
+        margin: 0;
+        padding: 0;
+        font-family: Georgia,Arial, sans-serif ;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      label {
+        color: #393646;
+      }
+
+      /* ///////////////////// */
+
+      .container {
+        display: flex;
+
+        height: 94vh;
+      }
+
+      .image {
+        flex: 1;
+        background-image: linear-gradient(to right, #00000000, #00000000, #f4eee0), url("https://raw.githubusercontent.com/bilalsp/high_vol_stock/main/img/banner.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .form-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4eee0;
+      }
+
+      .upload-form {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-group input[type="file"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .button-div {
+        display: flex;
+        justify-content: center;
+      }
+
+      .button-div > button {
+        width: 35%;
+        padding: 8px 12px;
+        /* background-color: #393fed; */
+        background-color: #393646;
+        color: #f4eee0;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4vh;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #6d5d6e;
+        color: #f4eee0;
+      }
+
+      .footer > a {
+        color: #f4eee0;
+      }
+
+      /* .bankruptcy {
+        
+      } */
+
+      .bankruptcy h3{
+        font-weight: bold;
+        width: auto;
+        display: inline-block;
+        margin-top: 40px;
+        font-size: 20px;
+        overflow: hidden; /* Ensures the content is not revealed until the animation */
+        border-right: 0.15em solid #393646; /* The typwriter cursor */
+        white-space: nowrap; /* Keeps the content on a single line */
+       
+        letter-spacing: 0.15em; /* Adjust as needed */
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      /* The typing effect */
+      @keyframes typing {
+        from {
+          max-width: 0;
+        }
+        to {
+          max-width: 100%;
+        }
+      }
+
+      /* The typewriter cursor effect */
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #393646;
+        }
+      }
+
+      /* //////////////////// */
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="image"></div>
+      <div class="form-container">
+        <div style="margin-bottom: 75px">
+          <h1 style="font-size: 40px; text-align: center">
+            Financial Distress Predictor
+          </h1>
+        </div>
+        <div>
+          <form
+            class="form-group"
+            action=" {{ url_for('predict')}}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <label for="csv-file">Select CSV File</label>
+            <input
+              type="file"
+              id="csv-file"
+              name="uploadedCSV"
+              required="required"
+              accept=".csv"
+            />
+
+            <br />
+            <p>
+              Header
+              <input
+                type="radio"
+                name="header"
+                value=1
+                required="required"
+                checked
+              />
+            </p>
+            <p>
+              No Header
+              <input type="radio" name="header" value=0 required="required" />
+            </p>
+
+            <div style="margin-top: 50px" class="button-div">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+
+          <center>
+            <div class="bankruptcy">
+              <h3>{{ prediction_placeholder }}</h3>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      Github Repository:
+      <a
+        style="margin-left: 10px"
+        target="_blank"
+        href="https://github.com/saifsafsf/Financial-Distress-Prediction"
+        >https://github.com/saifsafsf/Financial-Distress-Prediction</a
+      >
+    </div>
+  </body>
+</html>
